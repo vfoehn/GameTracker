@@ -1,5 +1,5 @@
-import requests.MatchesRequest
-import requests.SummonerAccountRequest
+import org.json.JSONObject
+import requests.MatchHistoryRequest
 
 fun main() {
     println("Hello World")
@@ -8,4 +8,6 @@ fun main() {
 //    request.sendRequest()
     val poller = Poller("RGAPI-3275faa2-19c2-4533-97d5-645b2890cf83", "euw1", "FuzzleyJojo")
     poller.fetchAccountInformation()
+    poller.fetchMatchHistory()
+    poller.fetchMatchInfo(1)
 }

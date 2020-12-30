@@ -1,18 +1,32 @@
-import exceptions.RecurrentFailedRequestsException
+import org.json.JSONArray
 import org.json.JSONObject
+import requests.MatchHistoryRequest
+import requests.MatchInfoRequest
 import requests.SummonerAccountRequest
-import kotlin.system.exitProcess
 
 class Poller(val apiKey: String, val region: String, val username: String) {
 
     lateinit var account: JSONObject
+    lateinit var matchHistory: JSONArray
 
     fun fetchAccountInformation() {
-        val accountRequest = SummonerAccountRequest(apiKey, region, username)
-        account = accountRequest.sendRequest()
+        val request = SummonerAccountRequest(apiKey, region, username)
+        account = request.sendRequest()
     }
 
     fun fetchMatchHistory() {
+        val accountId = account["accountId"].toString()
+        val request = MatchHistoryRequest(apiKey, region, accountId)
+        val response = request.sendRequest()
+        matchHistory = response["matches"] as JSONArray
+    }
 
+    fun fetchMatchInfo(gameId: Int): JSONObject {
+        val request = MatchInfoRequest(apiKey, region, gameId.toString())
+        return request.sendRequest()
+    }
+
+    fun getMatchFromHistory(index: Int): JSONObject {
+        return matchHistory[index] as JSONObject
     }
 }
