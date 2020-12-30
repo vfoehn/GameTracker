@@ -4,37 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="780d60cd-1dd9-4d45-8211-eb0eb5e731f4" name="Default Changelist" comment="Add files from old branch">
-      <change afterPath="$PROJECT_DIR$/TODO.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/Poller.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/requests/MatchesRequest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/requests/Request.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/requests/SummonerAccountRequest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Default_Changelist_.xml" afterDir="false" />
+    <list default="true" id="780d60cd-1dd9-4d45-8211-eb0eb5e731f4" name="Default Changelist" comment="Create successful requests.">
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/RecurrentFailedRequestsException.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/20201230_10121098933986645809.compiler.options" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/20201230_3023611546917900952.compiler.options" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/20201230_3467809710430831653.compiler.options" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/20201230_3558810426758183543.compiler.options" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/20201230_4211777390938865754.compiler.options" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/20201230_7360585032236830534.compiler.options" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/META-INF/LeagueOfLegendsPoller.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/MainKt.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/LeagueOfLegendsPoller10SNAPSHOTjar-classes.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/LeagueOfLegendsPoller-1.0-SNAPSHOT.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/jar/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Poller.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Poller.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,6 +88,7 @@
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="TEXT" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
@@ -237,7 +211,7 @@
       <option name="presentableId" value="Default" />
       <updated>1609333143259</updated>
       <workItem from="1609333144739" duration="7650000" />
-      <workItem from="1609341376794" duration="6985000" />
+      <workItem from="1609341376794" duration="8640000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1609340921641</created>
@@ -267,7 +241,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609341716366</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Create successful requests.">
+      <created>1609350440702</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1609350440702</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -289,6 +270,7 @@
     <MESSAGE value="Initial commit" />
     <MESSAGE value="Add .gitignore" />
     <MESSAGE value="Add files from old branch" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add files from old branch" />
+    <MESSAGE value="Create successful requests." />
+    <option name="LAST_COMMIT_MESSAGE" value="Create successful requests." />
   </component>
 </project>
