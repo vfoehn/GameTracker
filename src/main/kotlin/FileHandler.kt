@@ -6,12 +6,22 @@ import org.json.JSONTokener
 import java.io.FileInputStream
 
 import java.io.InputStream
+import java.io.FileNotFoundException
+
+import java.util.Properties
+
+import java.io.IOException
+
+
+
 
 
 
 
 
 object FileHandler {
+
+    val CONFIG_FILE_PATH = "src${File.separator}main${File.separator}resources${File.separator}config.properties"
 
     fun fileExists(filePath: String): Boolean {
         return File(filePath).exists()
@@ -44,5 +54,21 @@ object FileHandler {
             else -> myFile.println(content.toString())
         }
         myFile.close()
+    }
+
+    fun readConfigFromFile(): Properties {
+        val properties = Properties()
+        val inputStream = FileInputStream(CONFIG_FILE_PATH)
+        try {
+            if (inputStream != null) {
+                properties.load(inputStream)
+            } else {
+                throw FileNotFoundException("File \"$CONFIG_FILE_PATH\" not found.")
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        return properties
     }
 }

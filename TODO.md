@@ -6,3 +6,10 @@
     - Load the JSON into Kotlin
 - Have a separate config file that contains apiKey and other info (such as region and summoner ID)
 - Create a log
+
+
+
+
+## Possible Extensions
+- Send screenshot of lol client
+- Introduce logging

@@ -4,20 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="780d60cd-1dd9-4d45-8211-eb0eb5e731f4" name="Default Changelist" comment="Before reading match history from files.">
+    <list default="true" id="780d60cd-1dd9-4d45-8211-eb0eb5e731f4" name="Default Changelist" comment="Create logic that decides when to read/write from/to file.">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/config.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.7/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.7/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.7/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.7/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TODO.md" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/FileHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/FileHandler.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/MatchAnalyzer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/MatchAnalyzer.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Poller.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Poller.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/requests/MatchHistoryRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/requests/MatchHistoryRequest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/requests/Request.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/requests/Request.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,6 +97,9 @@
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="TEXT" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/league_of_legends/player_data/FuzzleyJojo" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
@@ -225,7 +227,7 @@
       <updated>1609333143259</updated>
       <workItem from="1609333144739" duration="7650000" />
       <workItem from="1609341376794" duration="12801000" />
-      <workItem from="1609389084915" duration="17926000" />
+      <workItem from="1609389084915" duration="20291000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1609340921641</created>
@@ -297,7 +299,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609399889028</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Create logic that decides when to read/write from/to file.">
+      <created>1609407336885</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1609407336885</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -325,7 +334,8 @@
     <MESSAGE value="Poller can fetch match info." />
     <MESSAGE value="Create FileHandler." />
     <MESSAGE value="Before reading match history from files." />
-    <option name="LAST_COMMIT_MESSAGE" value="Before reading match history from files." />
+    <MESSAGE value="Create logic that decides when to read/write from/to file." />
+    <option name="LAST_COMMIT_MESSAGE" value="Create logic that decides when to read/write from/to file." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
