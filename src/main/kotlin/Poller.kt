@@ -3,9 +3,11 @@ import org.json.JSONObject
 import requests.MatchHistoryRequest
 import requests.MatchInfoRequest
 import requests.SummonerAccountRequest
+import java.io.File
 
 class Poller(val apiKey: String, val region: String, val username: String) {
 
+    val dataDirectory = "league_of_legends${File.separator}player_data${File.separator}$username"
     lateinit var account: JSONObject
     lateinit var matchHistory: JSONArray
 
@@ -21,7 +23,7 @@ class Poller(val apiKey: String, val region: String, val username: String) {
         matchHistory = response["matches"] as JSONArray
     }
 
-    fun fetchMatchInfo(gameId: Int): JSONObject {
+    fun fetchMatchInfo(gameId: Long): JSONObject {
         val request = MatchInfoRequest(apiKey, region, gameId.toString())
         return request.sendRequest()
     }

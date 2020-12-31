@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="780d60cd-1dd9-4d45-8211-eb0eb5e731f4" name="Default Changelist" comment="Move repeated request logic to Request.kt.">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/requests/MatchHistoryRequest.kt" afterDir="false" />
+    <list default="true" id="780d60cd-1dd9-4d45-8211-eb0eb5e731f4" name="Default Changelist" comment="Poller can fetch match info.">
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/FileHandler.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/MatchAnalyzer.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.7/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.7/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.7/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/fileHashes/fileHashes.bin" afterDir="false" />
@@ -14,7 +15,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Poller.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Poller.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/requests/MatchesRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/requests/MatchInfoRequest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/requests/MatchInfoRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/requests/MatchInfoRequest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/requests/Request.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/requests/Request.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,15 +110,13 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.MainKt">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -220,7 +220,8 @@
       <option name="presentableId" value="Default" />
       <updated>1609333143259</updated>
       <workItem from="1609333144739" duration="7650000" />
-      <workItem from="1609341376794" duration="12606000" />
+      <workItem from="1609341376794" duration="12801000" />
+      <workItem from="1609389084915" duration="9545000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1609340921641</created>
@@ -271,7 +272,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609353683049</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Poller can fetch match info.">
+      <created>1609356047750</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1609356047750</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -296,6 +304,17 @@
     <MESSAGE value="Create successful requests." />
     <MESSAGE value="Create poller" />
     <MESSAGE value="Move repeated request logic to Request.kt." />
-    <option name="LAST_COMMIT_MESSAGE" value="Move repeated request logic to Request.kt." />
+    <MESSAGE value="Poller can fetch match info." />
+    <option name="LAST_COMMIT_MESSAGE" value="Poller can fetch match info." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="org.json.JSONException" package="org.json" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

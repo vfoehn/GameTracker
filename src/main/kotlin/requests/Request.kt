@@ -28,7 +28,10 @@ abstract class Request(val apiKey: String, val region: String) {
         con.requestMethod = "GET"
 
         val responseCode = con.responseCode
-        if (responseCode < 200 || responseCode >= 300) {
+        if (responseCode != 429 && responseCode in 400..500) {
+            // The requested data is not returned by the server because the request is faulty or it lacks permission.
+            // Note: Response code 429 represents "Rate limit exceeded". So there is still hope of obtaining the
+            // requested data.
             val exception = ApiRequestException(responseCode)
             exception.printStackTrace()
             exitProcess(-1)
