@@ -11,12 +11,22 @@ class Poller(val apiKey: String, val region: String, val username: String) {
     lateinit var account: JSONObject
     lateinit var matchHistory: JSONArray
 
-    fun fetchAccountInformation() {
+    init {
+        println("userFilesExist: ${userFilesExist()}")
+        fetchAccountInformation()
+        fetchMatchHistory()
+    }
+
+    private fun userFilesExist(): Boolean {
+        return FileHandler.fileExists(dataDirectory)
+    }
+
+    private fun fetchAccountInformation() {
         val request = SummonerAccountRequest(apiKey, region, username)
         account = request.sendRequest()
     }
 
-    fun fetchMatchHistory() {
+    private fun fetchMatchHistory() {
         val accountId = account["accountId"].toString()
         val request = MatchHistoryRequest(apiKey, region, accountId)
         val response = request.sendRequest()
