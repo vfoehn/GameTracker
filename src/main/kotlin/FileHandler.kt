@@ -4,9 +4,9 @@ import org.json.JSONTokener
 import java.io.File
 import java.io.PrintWriter
 import java.io.FileInputStream
-import java.io.FileNotFoundException
 import java.util.Properties
 
+// The FileHandler is responsible for I/O operations. Its main purpose is to read and write files.
 object FileHandler {
 
     val CONFIG_FILE_PATH = "src${File.separator}main${File.separator}resources${File.separator}config.properties"

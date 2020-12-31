@@ -12,6 +12,11 @@ import java.io.File
 import java.lang.Exception
 import java.util.*
 
+// The LeagueOfLegendsClient is the central entity for the "League of Legends" part of the program.
+// It contains the logic that decides when to
+//   - read/write the match history from/to file.
+//   - fetch new information from the League of Legends API servers.
+// Additionally, it checks if the given user had a poor performance in any of the new matches.
 class LeagueOfLegendsClient(val apiKey: String, val region: String, val username: String) {
 
     val dataDirectory = "league_of_legends${File.separator}player_data${File.separator}$username"
@@ -89,7 +94,7 @@ class LeagueOfLegendsClient(val apiKey: String, val region: String, val username
         poorPerformances = LinkedList<Performance>() // Reset list of poor performances
         for (element in matchHistory) {
             val match = fetchMatchInfo((element as JSONObject).getLong("gameId"))
-            val matchAnalyzer = MatchAnalyzer(match, username)
+            val matchAnalyzer = MatchDataOrganizer(match, username)
             val performance: Performance = matchAnalyzer.getPerformance()
             if (performance.isPoor) {
                 poorPerformances.add(performance)

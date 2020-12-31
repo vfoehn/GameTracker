@@ -11,6 +11,8 @@ import java.net.HttpURLConnection
 import java.net.URL
 import kotlin.system.exitProcess
 
+// A Request represents an HTTP GET request. The URL, header and query parameters can be customized.
+// The class provides logic to deal with different (successful and failed) HTTP responses.
 abstract class Request(val apiKey: String) {
 
     var logger: Logger = Logger.getLogger(Request::class.java)

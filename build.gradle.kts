@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "me.vfoeh"
-version = "1.0-SNAPSHOT"
+version = "1.0"
 
 repositories {
     mavenCentral()
@@ -32,9 +32,25 @@ sourceSets.main {
 }
 
 tasks {
-    jar {
+     jar {
+        description = "Create a self-contained jar file for GameTracker."
         manifest {
             attributes["Main-Class"] = "MainKt"
+        }
+
+        from(sourceSets.main.get().output)
+
+        dependsOn(configurations.runtimeClasspath)
+        from({
+            configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
+        })
+    }
+
+    create("runGameTracker") {
+        doLast {
+            exec {
+                commandLine("java -jar build\\libs\\GameTracker-1.0-SNAPSHOT.jar".split(" "))
+            }
         }
     }
 }

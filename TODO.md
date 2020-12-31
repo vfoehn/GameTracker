@@ -2,7 +2,6 @@
 
 - Add documentation
     - Create a README with pictures (e.g. Telegram screenshot)
-    - Create a section that describes what 
 - Download champion JSON file and add it to the repo using gradle.
     - Load the JSON into Kotlin
 - Write comments

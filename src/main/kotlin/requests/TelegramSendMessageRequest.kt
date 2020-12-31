@@ -1,7 +1,6 @@
 package requests
 
-import java.net.HttpURLConnection
-
+// A TelegramSendMessageRequest represents an HTTP GET request to send a message to a given chat.
 class TelegramSendMessageRequest(apiKey: String, val chatId: Int, val text: String) : TelegramRequest(apiKey){
 
     override fun getUrl(): String {

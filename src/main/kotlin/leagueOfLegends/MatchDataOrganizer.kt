@@ -4,7 +4,10 @@ import getField
 import org.json.JSONArray
 import org.json.JSONObject
 
-class MatchAnalyzer(val match: JSONObject, val protagonistUsername: String) {
+// A MatchDataOrganizer organizes the data for a given user (i.e., protagonist) in a given match.
+// The match data is provided in the shape of JSONObjects. It is the MatchDataOrganizer's job to extract
+// the relevant data and to combine different JSONs.
+class MatchDataOrganizer(val match: JSONObject, val protagonistUsername: String) {
 
     lateinit var protagonist: JSONObject
     lateinit var protagonistTeam: JSONObject

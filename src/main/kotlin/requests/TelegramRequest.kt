@@ -2,6 +2,7 @@ package requests
 
 import java.net.HttpURLConnection
 
+// A TelegramRequest represents an HTTP GET request to the Telegram API server.
 abstract class TelegramRequest(apiKey: String) : Request(apiKey){
 
     val urlDomain = "https://api.telegram.org"
