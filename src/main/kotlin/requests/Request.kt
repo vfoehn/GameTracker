@@ -47,14 +47,14 @@ abstract class Request(val apiKey: String) {
         }
 
         val responseReader = BufferedReader(InputStreamReader(con.inputStream))
-        var inputLine: String
         val responseString = StringBuffer()
-        while (responseReader.readLine().also { inputLine = it } != null) {
+        var inputLine = responseReader.readLine()
+        while (inputLine != null) {
             responseString.append(inputLine)
+            inputLine = responseReader.readLine()
         }
         responseReader.close()
 
-        println("here")
         response = if (encapsulateJSONArray) {
             JSONObject().put("versions", JSONArray(responseString.toString())) as JSONObject
         } else {

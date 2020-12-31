@@ -7,7 +7,7 @@
     - Load the JSON into Kotlin
 - Write comments
 - Reduce visibility classifiers wherever possible
-- Look for "todo" and "debug" in the files
+- Look for "here", "todo" and "debug" in the files
 
 
 
