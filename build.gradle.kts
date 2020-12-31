@@ -16,6 +16,7 @@ dependencies {
     testImplementation(kotlin("test-junit"))
     implementation(kotlin("script-runtime"))
     implementation("org.json:json:20201115")
+    implementation("log4j:log4j:1.2.17")
 }
 
 tasks.test {

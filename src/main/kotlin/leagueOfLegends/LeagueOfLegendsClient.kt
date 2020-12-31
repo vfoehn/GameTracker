@@ -11,7 +11,7 @@ import java.io.File
 import java.lang.Exception
 import java.util.*
 
-class Poller(val apiKey: String, val region: String, val username: String) {
+class LeagueOfLegendsClient(val apiKey: String, val region: String, val username: String) {
 
     val dataDirectory = "league_of_legends${File.separator}player_data${File.separator}$username"
     lateinit var mostRecentMatchTimestamp: Calendar
@@ -27,10 +27,9 @@ class Poller(val apiKey: String, val region: String, val username: String) {
     fun updateMatchHistory() {
         if (FileHandler.fileExists(dataDirectory)) {
             // Load previous match history from file.
-            val jsonTokener = FileHandler.readJsonFromFile("$dataDirectory${File.separator}match_history.json")
+            val jsonTokener = FileHandler.readJsonFromFile("$dataDirectory${File.separator}match_history_debug.json")
             val storedMatchHistory = JSONArray(jsonTokener)
             mostRecentMatchTimestamp = timestampToCalendar((storedMatchHistory[0] as JSONObject).getLong("timestamp"))
-            println("mostRecentMatchTimestamp: $mostRecentMatchTimestamp")
 
             // If there are more recent matches we need to fetch and analyze them.
             matchHistory = fetchMatchHistory()
@@ -47,7 +46,6 @@ class Poller(val apiKey: String, val region: String, val username: String) {
 
         FileHandler.writeToFile("$dataDirectory${File.separator}match_history.json", matchHistory)
         mostRecentMatchTimestamp = timestampToCalendar(getMatchFromHistory(0).getLong("timestamp"))
-        println("mostRecentMatchTimestamp: $mostRecentMatchTimestamp")
     }
 
     private fun fetchAccountInformation() {

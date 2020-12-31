@@ -1,7 +1,4 @@
-import leagueOfLegends.Poller
 import org.json.JSONObject
-import requests.TelegramSendMessageRequest
-import telegram.TelegramBot
 import java.util.Calendar
 
 

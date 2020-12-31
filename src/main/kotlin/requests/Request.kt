@@ -2,6 +2,7 @@ package requests
 
 import exceptions.ApiRequestException
 import exceptions.RecurrentFailedRequestsException
+import org.apache.log4j.Logger
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -10,6 +11,8 @@ import java.net.URL
 import kotlin.system.exitProcess
 
 abstract class Request(val apiKey: String) {
+
+    var logger: Logger = Logger.getLogger(Request::class.java)
 
     val MAX_FAILED_REQUEST = 5
     val BACKOFF_TIME: Long = 2000
@@ -28,6 +31,7 @@ abstract class Request(val apiKey: String) {
         con.requestMethod = "GET"
 
         val responseCode = con.responseCode
+        logger.info("responseCode: $responseCode")
         if (responseCode == 404) {
             // The results are empty. This can be the case if the filtering criteria are too strict.
             return JSONObject()
@@ -50,6 +54,7 @@ abstract class Request(val apiKey: String) {
         responseReader.close()
 
         response = JSONObject(responseString.toString())
+        logger.info("response: $response")
         return response
     }
 
