@@ -1,16 +1,23 @@
+import leagueOfLegends.Poller
 import org.json.JSONObject
-import java.io.File
-import java.util.*
+import requests.TelegramSendMessageRequest
+import telegram.TelegramBot
 import java.util.Calendar
 
 
-
-
 fun main() {
-    println(FileHandler.readConfigFromFile())
     val properties = FileHandler.readConfigFromFile()
-    val poller = Poller(properties.getProperty("apiKey"), properties.getProperty("region"), properties.getProperty("username"),)
-//    val poller = Poller("RGAPI-3275faa2-19c2-4533-97d5-645b2890cf83", "euw1", "FuzzleyJojo")
+    val controller = Controller(properties)
+    controller.poll()
+
+//    val poller = Poller(properties.getProperty("leagueOfLegendsApiKey"), properties.getProperty("region"), properties.getProperty("username"))
+//    val poorPerformances = poller.poorPerformances
+//    println("poorPerformances: $poorPerformances")
+//
+//    val telegramBot = TelegramBot(properties.getProperty("botName"), properties.getProperty("telegramApiKey"))
+//    val request = TelegramSendMessageRequest(properties.getProperty("telegramApiKey"), properties.getProperty("chatId").toInt(), poorPerformances.first.toString())
+//    val response = request.sendRequest()
+//    println(response)
 }
 
 // -------------------------------------------- Utility Functions -------------------------------------------------

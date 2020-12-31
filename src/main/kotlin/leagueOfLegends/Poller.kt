@@ -1,8 +1,12 @@
+package leagueOfLegends
+
+import FileHandler
 import org.json.JSONArray
 import org.json.JSONObject
 import requests.MatchHistoryRequest
 import requests.MatchInfoRequest
 import requests.SummonerAccountRequest
+import timestampToCalendar
 import java.io.File
 import java.lang.Exception
 import java.util.*
@@ -13,23 +17,24 @@ class Poller(val apiKey: String, val region: String, val username: String) {
     lateinit var mostRecentMatchTimestamp: Calendar
     lateinit var account: JSONObject
     lateinit var matchHistory: JSONArray
+    lateinit var poorPerformances : LinkedList<Performance>
+
 
     init {
         fetchAccountInformation()
-        initializeMatchHistory()
     }
 
-    private fun initializeMatchHistory() {
+    fun updateMatchHistory() {
         if (FileHandler.fileExists(dataDirectory)) {
             // Load previous match history from file.
-            val jsonTokener = FileHandler.readJsonFromFile("$dataDirectory${File.separator}match_history_debug.json")
+            val jsonTokener = FileHandler.readJsonFromFile("$dataDirectory${File.separator}match_history.json")
             val storedMatchHistory = JSONArray(jsonTokener)
             mostRecentMatchTimestamp = timestampToCalendar((storedMatchHistory[0] as JSONObject).getLong("timestamp"))
             println("mostRecentMatchTimestamp: $mostRecentMatchTimestamp")
 
             // If there are more recent matches we need to fetch and analyze them.
             matchHistory = fetchMatchHistory()
-            analyzeMatches()
+            findPoorPerformances()
 
             // Only once the match analysis is done, can we add the stored match history.
             matchHistory.putAll(storedMatchHistory)
@@ -37,7 +42,7 @@ class Poller(val apiKey: String, val region: String, val username: String) {
             mostRecentMatchTimestamp = Calendar.getInstance()
             mostRecentMatchTimestamp.timeInMillis = 0
             matchHistory = fetchMatchHistory()
-            analyzeMatches()
+            findPoorPerformances()
         }
 
         FileHandler.writeToFile("$dataDirectory${File.separator}match_history.json", matchHistory)
@@ -69,13 +74,16 @@ class Poller(val apiKey: String, val region: String, val username: String) {
         return matchHistory[index] as JSONObject
     }
 
-    private fun analyzeMatches() {
-        println("Analyzing matches")
+    private fun findPoorPerformances() {
+        poorPerformances = LinkedList<Performance>() // Reset list of poor performances
         for (element in matchHistory) {
             val elementJson = element as JSONObject
             val match = fetchMatchInfo(element.getLong("gameId"))
             val matchAnalyzer = MatchAnalyzer(match, username)
-            println(matchAnalyzer.goodPerformance())
+            val performance: Performance = matchAnalyzer.getPerformance()
+            if (performance.isPoor) {
+                poorPerformances.add(performance)
+            }
         }
     }
 }

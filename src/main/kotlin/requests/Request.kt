@@ -9,23 +9,22 @@ import java.net.HttpURLConnection
 import java.net.URL
 import kotlin.system.exitProcess
 
-abstract class Request(val apiKey: String, val region: String) {
+abstract class Request(val apiKey: String) {
 
     val MAX_FAILED_REQUEST = 5
     val BACKOFF_TIME: Long = 2000
-    val urlDomain = "api.riotgames.com"
-    val apiVersion = "v4"
 
     abstract fun getUrl(): String
+
+    abstract fun setHeader(con: HttpURLConnection)
 
     fun sendSingleRequest(): JSONObject {
         var response: JSONObject? = null
         val urlString = "${getUrl()}"
-        // "https://euw1.api.riotgames.com/lol/match/v4/matches/5005226744?api_key=RGAPI-3275faa2-19c2-4533-97d5-645b2890cf83"
-        println("urlString: $urlString")
+        // println("urlString: $urlString")
         val url = URL(urlString)
         val con = url.openConnection() as HttpURLConnection
-        con.setRequestProperty("X-Riot-Token", apiKey)
+        setHeader(con)
         con.requestMethod = "GET"
 
         val responseCode = con.responseCode
@@ -51,7 +50,6 @@ abstract class Request(val apiKey: String, val region: String) {
         responseReader.close()
 
         response = JSONObject(responseString.toString())
-        println(response) // TODO: Delete line
         return response
     }
 
@@ -61,6 +59,7 @@ abstract class Request(val apiKey: String, val region: String) {
         while (accountResponse == null) {
             try {
                 accountResponse = sendSingleRequest()
+                numFailedRequests = 0
             } catch (e: Exception) {
                 numFailedRequests++
                 if (numFailedRequests >= MAX_FAILED_REQUEST) {

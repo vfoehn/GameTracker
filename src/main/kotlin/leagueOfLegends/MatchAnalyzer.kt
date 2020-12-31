@@ -1,3 +1,6 @@
+package leagueOfLegends
+
+import getField
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -35,14 +38,11 @@ class MatchAnalyzer(val match: JSONObject, val protagonistUsername: String) {
         }
     }
 
-    fun goodPerformance(): Boolean {
-        val win = if (protagonistTeam.get("win") == "Win") true else false
+    fun getPerformance(): Performance {
         val protagonistStats = protagonist.getField("stats")
-        val kills = protagonistStats.getInt("kills")
-        val deaths = protagonistStats.getInt("deaths")
-        val kda = kills.toDouble() / Math.max(1, deaths)
-
-        // If the protagonist lost the game and had a negative kda, it is considered a bad performance.
-        return !(!win && kda < 1)
+        val win = if (protagonistTeam.get("win") == "Win") true else false
+        val champion = protagonist.getInt("championId")
+        val performance = Performance(match, protagonistStats, protagonistTeam, win, champion)
+        return performance
     }
 }
