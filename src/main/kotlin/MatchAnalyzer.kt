@@ -9,8 +9,8 @@ class MatchAnalyzer(val match: JSONObject, val protagonistUsername: String) {
     init {
         getProtagonistStats()
         getProtagonistTeam()
-        println(protagonist)
-        println(protagonistTeam)
+//        println(protagonist)
+//        println(protagonistTeam)
     }
 
     private fun getProtagonistStats() {
@@ -40,9 +40,9 @@ class MatchAnalyzer(val match: JSONObject, val protagonistUsername: String) {
         val protagonistStats = protagonist.getField("stats")
         val kills = protagonistStats.getInt("kills")
         val deaths = protagonistStats.getInt("deaths")
-        val kda = kills.toDouble() / Math.min(1, deaths)
+        val kda = kills.toDouble() / Math.max(1, deaths)
 
         // If the protagonist lost the game and had a negative kda, it is considered a bad performance.
-        return (!win && kda < 1)
+        return !(!win && kda < 1)
     }
 }

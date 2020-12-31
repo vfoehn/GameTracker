@@ -1,5 +1,10 @@
 import org.json.JSONObject
 import java.io.File
+import java.util.*
+import java.util.Calendar
+
+
+
 
 fun main() {
     println("Hello World")
@@ -7,13 +12,21 @@ fun main() {
 //    val request = SummonerAccountRequest("RGAPI-3275faa2-19c2-4533-97d5-645b2890cf83", "euw1", "FuzzleyJojo")
 //    request.sendRequest()
     val poller = Poller("RGAPI-3275faa2-19c2-4533-97d5-645b2890cf83", "euw1", "FuzzleyJojo")
-    val matchInfo: JSONObject = poller.fetchMatchInfo(poller.getMatchFromHistory(0)["gameId"] as Long)
+//    val matchInfo: JSONObject = poller.fetchMatchInfo(poller.getMatchFromHistory(0)["gameId"] as Long)
 
-    val matchAnalyzer = MatchAnalyzer(matchInfo, "FuzzleyJojo")
-    println("goodPerformance: ${matchAnalyzer.goodPerformance()}")
+//    val matchAnalyzer = MatchAnalyzer(matchInfo, "FuzzleyJojo")
+//    println("goodPerformance: ${matchAnalyzer.goodPerformance()}")
 
-    val fileHandler = FileHandler
-    fileHandler.writeToFile("dir${File.separator}matchHistory.json", poller.matchHistory)
+//    val fileHandler = FileHandler
+//    fileHandler.writeToFile("dir${File.separator}matchHistory.json", poller.matchHistory)
+}
+
+// -------------------------------------------- Utility Functions -------------------------------------------------
+
+fun timestampToCalendar(timestamp: Long): Calendar {
+    val calendar = Calendar.getInstance()
+    calendar.timeInMillis = timestamp
+    return calendar
 }
 
 // Access a non-nested field in a JSONObject. The function takes care of the necessary casts. (Extension function)

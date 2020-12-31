@@ -20,14 +20,19 @@ abstract class Request(val apiKey: String, val region: String) {
 
     fun sendSingleRequest(): JSONObject {
         var response: JSONObject? = null
-        val urlString = "${getUrl()}?api_key=$apiKey"
+        val urlString = "${getUrl()}"
         // "https://euw1.api.riotgames.com/lol/match/v4/matches/5005226744?api_key=RGAPI-3275faa2-19c2-4533-97d5-645b2890cf83"
-        print("urlString: $urlString")
+        println("urlString: $urlString")
         val url = URL(urlString)
-        val con: HttpURLConnection = url.openConnection() as HttpURLConnection
+        val con = url.openConnection() as HttpURLConnection
+        con.setRequestProperty("X-Riot-Token", apiKey)
         con.requestMethod = "GET"
 
         val responseCode = con.responseCode
+        if (responseCode == 404) {
+            // The results are empty. This can be the case if the filtering criteria are too strict.
+            return JSONObject()
+        }
         if (responseCode != 429 && responseCode in 400..500) {
             // The requested data is not returned by the server because the request is faulty or it lacks permission.
             // Note: Response code 429 represents "Rate limit exceeded". So there is still hope of obtaining the

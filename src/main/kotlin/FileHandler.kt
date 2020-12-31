@@ -2,6 +2,13 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
 import java.io.PrintWriter
+import org.json.JSONTokener
+import java.io.FileInputStream
+
+import java.io.InputStream
+
+
+
 
 
 object FileHandler {
@@ -16,6 +23,15 @@ object FileHandler {
         if (!directory.exists()) {
             directory.mkdirs()
         }
+    }
+
+    fun readJsonFromFile(filePath: String): JSONTokener {
+        if (!fileExists(filePath)) {
+            throw Exception("File $filePath does not exist.")
+        }
+
+        val inputStream = FileInputStream(filePath)
+        return JSONTokener(inputStream)
     }
 
     fun writeToFile(filePath: String, content: Any) {
