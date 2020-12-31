@@ -31,12 +31,6 @@ sourceSets.main {
     java.srcDirs("src/main/myKotlin")
 }
 
-/*tasks.create("runStuff") {
-    exec {
-        commandLine("C:\\Users\\vfoeh\\.jdks\\openjdk-15.0.1\\bin\\java.exe \"-javaagent:C:\\Program Files\\JetBrains\\IntelliJ IDEA 2020.3\\lib\\idea_rt.jar=55636:C:\\Program Files\\JetBrains\\IntelliJ IDEA 2020.3\\bin\" -Dfile.encoding=UTF-8 -classpath C:\\Users\\vfoeh\\IdeaProjects\\Playground\\out\\production\\Playground;C:\\Users\\vfoeh\\AppData\\Roaming\\JetBrains\\IntelliJIdea2020.3\\plugins\\Kotlin\\kotlinc\\lib\\kotlin-stdlib.jar;C:\\Users\\vfoeh\\AppData\\Roaming\\JetBrains\\IntelliJIdea2020.3\\plugins\\Kotlin\\kotlinc\\lib\\kotlin-reflect.jar;C:\\Users\\vfoeh\\AppData\\Roaming\\JetBrains\\IntelliJIdea2020.3\\plugins\\Kotlin\\kotlinc\\lib\\kotlin-test.jar MainKt")
-    }
-}*/
-
 tasks {
     jar {
         manifest {

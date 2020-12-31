@@ -12,8 +12,6 @@ class MatchAnalyzer(val match: JSONObject, val protagonistUsername: String) {
     init {
         getProtagonistStats()
         getProtagonistTeam()
-//        println(protagonist)
-//        println(protagonistTeam)
     }
 
     private fun getProtagonistStats() {

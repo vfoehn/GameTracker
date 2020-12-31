@@ -2,3 +2,4 @@
 .idea
 build
 league_of_legends
+src/main/resources/config.properties

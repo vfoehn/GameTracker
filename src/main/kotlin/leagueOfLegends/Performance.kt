@@ -2,7 +2,8 @@ package leagueOfLegends
 
 import org.json.JSONObject
 
-class Performance(val match: JSONObject, val protagonistStats: JSONObject, val protagonistTeam: JSONObject, val win: Boolean, val championId: Int) {
+class Performance(val match: JSONObject, val protagonistStats: JSONObject, val protagonistTeam: JSONObject,
+                  val win: Boolean, val championId: Int) {
 
     val kills = protagonistStats.getInt("kills")
     val deaths = protagonistStats.getInt("deaths")

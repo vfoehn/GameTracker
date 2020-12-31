@@ -7,7 +7,6 @@ import java.io.FileInputStream
 import java.io.FileNotFoundException
 import java.util.Properties
 
-
 object FileHandler {
 
     val CONFIG_FILE_PATH = "src${File.separator}main${File.separator}resources${File.separator}config.properties"
@@ -45,15 +44,11 @@ object FileHandler {
         myFile.close()
     }
 
-    fun readConfigFromFile(): Properties {
+    fun readConfigFromFile(filePath: String = CONFIG_FILE_PATH): Properties {
         val properties = Properties()
-        val inputStream = FileInputStream(CONFIG_FILE_PATH)
+        val inputStream = FileInputStream(filePath)
         try {
-            if (inputStream != null) {
-                properties.load(inputStream)
-            } else {
-                throw FileNotFoundException("File \"$CONFIG_FILE_PATH\" not found.")
-            }
+            properties.load(inputStream)
         } catch (e: Exception) {
             e.printStackTrace()
         }

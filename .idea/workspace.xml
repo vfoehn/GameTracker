@@ -4,22 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="780d60cd-1dd9-4d45-8211-eb0eb5e731f4" name="Default Changelist" comment="Create controller.">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/log4j.properties" afterDir="false" />
+    <list default="true" id="780d60cd-1dd9-4d45-8211-eb0eb5e731f4" name="Default Changelist" comment="Add log4j logger.">
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/Utils.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/requests/DDragonRequest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/requests/TelegramGetUpdatesRequest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/requests/TelegramRequest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.7/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.7/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.7/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.7/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TODO.md" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Controller.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Controller.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/FileHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/FileHandler.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/leagueOfLegends/Poller.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/leagueOfLegends/LeagueOfLegendsClient.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/exceptions/ApiRequestException.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/exceptions/ApiRequestException.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/exceptions/RecurrentFailedRequestsException.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/exceptions/RecurrentFailedRequestsException.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/leagueOfLegends/LeagueOfLegendsClient.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/leagueOfLegends/LeagueOfLegendsClient.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/leagueOfLegends/MatchAnalyzer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/leagueOfLegends/MatchAnalyzer.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/leagueOfLegends/Performance.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/leagueOfLegends/Performance.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/requests/LeagueOfLegendsRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/requests/LoLRequest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/requests/MatchHistoryRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/requests/LoLMatchHistoryRequest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/requests/MatchInfoRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/requests/LoLMatchInfoRequest.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/requests/Request.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/requests/Request.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/requests/SummonerAccountRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/requests/LoLSummonerAccountRequest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/requests/TelegramSendMessageRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/requests/TelegramSendMessageRequest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/telegram/TelegramBot.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/telegram/TelegramBot.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -234,7 +246,7 @@
       <updated>1609333143259</updated>
       <workItem from="1609333144739" duration="7650000" />
       <workItem from="1609341376794" duration="12801000" />
-      <workItem from="1609389084915" duration="32821000" />
+      <workItem from="1609389084915" duration="38079000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1609340921641</created>
@@ -327,7 +339,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609425255638</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Add log4j logger.">
+      <created>1609426902125</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1609426902125</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -358,7 +377,8 @@
     <MESSAGE value="Create logic that decides when to read/write from/to file." />
     <MESSAGE value="Introduce config file." />
     <MESSAGE value="Create controller." />
-    <option name="LAST_COMMIT_MESSAGE" value="Create controller." />
+    <MESSAGE value="Add log4j logger." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add log4j logger." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

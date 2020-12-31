@@ -3,6 +3,7 @@ package requests
 import exceptions.ApiRequestException
 import exceptions.RecurrentFailedRequestsException
 import org.apache.log4j.Logger
+import org.json.JSONArray
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -21,9 +22,9 @@ abstract class Request(val apiKey: String) {
 
     abstract fun setHeader(con: HttpURLConnection)
 
-    fun sendSingleRequest(): JSONObject {
-        var response: JSONObject? = null
-        val urlString = "${getUrl()}"
+    fun sendSingleRequest(encapsulateJSONArray: Boolean): JSONObject {
+        val response: JSONObject?
+        val urlString = getUrl()
         // println("urlString: $urlString")
         val url = URL(urlString)
         val con = url.openConnection() as HttpURLConnection
@@ -46,24 +47,31 @@ abstract class Request(val apiKey: String) {
         }
 
         val responseReader = BufferedReader(InputStreamReader(con.inputStream))
-        var inputLine: String? = ""
+        var inputLine: String
         val responseString = StringBuffer()
         while (responseReader.readLine().also { inputLine = it } != null) {
             responseString.append(inputLine)
         }
         responseReader.close()
 
-        response = JSONObject(responseString.toString())
+        println("here")
+        response = if (encapsulateJSONArray) {
+            JSONObject().put("versions", JSONArray(responseString.toString())) as JSONObject
+        } else {
+            JSONObject(responseString.toString())
+        }
         logger.info("response: $response")
         return response
     }
 
-    fun sendRequest(): JSONObject {
+    // The boolean "encapsulateJSONArray" indicates that the HTTP response is of type JSONArray and should
+    // be encapsulated inside a JSONObject in order to satisfy the return types of the functions.
+    fun sendRequest(encapsulateJSONArray: Boolean = false): JSONObject {
         var accountResponse: JSONObject? = null
         var numFailedRequests = 0
         while (accountResponse == null) {
             try {
-                accountResponse = sendSingleRequest()
+                accountResponse = sendSingleRequest(encapsulateJSONArray)
                 numFailedRequests = 0
             } catch (e: Exception) {
                 numFailedRequests++

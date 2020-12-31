@@ -3,9 +3,10 @@ package leagueOfLegends
 import FileHandler
 import org.json.JSONArray
 import org.json.JSONObject
-import requests.MatchHistoryRequest
-import requests.MatchInfoRequest
-import requests.SummonerAccountRequest
+import requests.DDragonRequest
+import requests.LoLMatchHistoryRequest
+import requests.LoLMatchInfoRequest
+import requests.LoLSummonerAccountRequest
 import timestampToCalendar
 import java.io.File
 import java.lang.Exception
@@ -15,12 +16,14 @@ class LeagueOfLegendsClient(val apiKey: String, val region: String, val username
 
     val dataDirectory = "league_of_legends${File.separator}player_data${File.separator}$username"
     lateinit var mostRecentMatchTimestamp: Calendar
+    lateinit var champions: JSONObject
     lateinit var account: JSONObject
     lateinit var matchHistory: JSONArray
     lateinit var poorPerformances : LinkedList<Performance>
 
 
     init {
+        fetchChampionsInformation()
         fetchAccountInformation()
     }
 
@@ -48,8 +51,18 @@ class LeagueOfLegendsClient(val apiKey: String, val region: String, val username
         mostRecentMatchTimestamp = timestampToCalendar(getMatchFromHistory(0).getLong("timestamp"))
     }
 
+    private fun fetchChampionsInformation() {
+        // Get current patch version.
+        var request = DDragonRequest(apiKey, region, "api/versions.json")
+        val response: JSONObject = request.sendRequest(encapsulateJSONArray = true)
+        val latestVersion = (response["versions"] as JSONArray)[0]
+
+        request = DDragonRequest(apiKey, region, "cdn/$latestVersion/data/en_US/champion.json")
+        champions = request.sendRequest()
+    }
+
     private fun fetchAccountInformation() {
-        val request = SummonerAccountRequest(apiKey, region, username)
+        val request = LoLSummonerAccountRequest(apiKey, region, username)
         account = request.sendRequest()
         if (account.isEmpty) {
             throw Exception("The account with username \"$username\" may not exist.")
@@ -58,13 +71,13 @@ class LeagueOfLegendsClient(val apiKey: String, val region: String, val username
 
     private fun fetchMatchHistory(): JSONArray {
         val accountId = account["accountId"].toString()
-        val request = MatchHistoryRequest(apiKey, region, accountId, (mostRecentMatchTimestamp.timeInMillis+1).toString())
+        val request = LoLMatchHistoryRequest(apiKey, region, accountId, (mostRecentMatchTimestamp.timeInMillis+1).toString())
         val response = request.sendRequest()
         return if (response.isEmpty) JSONArray() else response["matches"] as JSONArray
     }
 
     fun fetchMatchInfo(gameId: Long): JSONObject {
-        val request = MatchInfoRequest(apiKey, region, gameId.toString())
+        val request = LoLMatchInfoRequest(apiKey, region, gameId.toString())
         return request.sendRequest()
     }
 
@@ -75,8 +88,7 @@ class LeagueOfLegendsClient(val apiKey: String, val region: String, val username
     private fun findPoorPerformances() {
         poorPerformances = LinkedList<Performance>() // Reset list of poor performances
         for (element in matchHistory) {
-            val elementJson = element as JSONObject
-            val match = fetchMatchInfo(element.getLong("gameId"))
+            val match = fetchMatchInfo((element as JSONObject).getLong("gameId"))
             val matchAnalyzer = MatchAnalyzer(match, username)
             val performance: Performance = matchAnalyzer.getPerformance()
             if (performance.isPoor) {
