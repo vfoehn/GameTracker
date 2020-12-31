@@ -1,3 +1,3 @@
 
-rootProject.name = "LeagueOfLegendsPoller"
+rootProject.name = "GameTracker"
 
