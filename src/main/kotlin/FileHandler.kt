@@ -9,7 +9,7 @@ import java.util.Properties
 // The FileHandler is responsible for I/O operations. Its main purpose is to read and write files.
 object FileHandler {
 
-    val CONFIG_FILE_PATH = "src${File.separator}main${File.separator}resources${File.separator}config.properties"
+    private val CONFIG_FILE_PATH = "src${File.separator}main${File.separator}resources${File.separator}config.properties"
 
     fun fileExists(filePath: String): Boolean {
         return File(filePath).exists()

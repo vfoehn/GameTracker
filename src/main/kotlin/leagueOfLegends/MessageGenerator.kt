@@ -7,7 +7,7 @@ object MessageGenerator {
     fun generateMessage(performance: Performance): String {
         val potentialMessages = if (performance.win) generateWinMessage(performance) else generateDefeatMessage(performance)
         return "${generateGameSummary(performance)}$LINE_BREAK" +
-               "${potentialMessages.random()}"
+               potentialMessages.random()
     }
 
     private fun generateGameSummary(performance: Performance): String {
@@ -18,13 +18,14 @@ object MessageGenerator {
     private fun generateDefeatMessage(performance: Performance): List<String> {
         val champion = performance.champion.getString("name")
         val individualScore = performance.individualScore
+        val phrase = "No wonder you lost."
         return if (individualScore < 0.5) {
             listOf(
-                "Are you intentionally losing games to start smurfing again?",
+                "$phrase Are you intentionally losing games to start smurfing again?",
                 "Here is a link to uninstall League of Legends: https://gamerone.gg/how-to-uninstall-league-of-legends." +
-                        "Please follow the instructions.",
-                "I don't think you should be playing $champion anymore.",
-                "Please watch a tutorial on how to play $champion properly."
+                        " Please follow the instructions.",
+                "$phrase I don't think you should be playing $champion anymore.",
+                "$phrase Please watch a tutorial on how to play $champion properly."
             )
         } else if (individualScore < 0.7) {
             listOf(
@@ -42,11 +43,12 @@ object MessageGenerator {
 
     private fun generateWinMessage(performance: Performance): List<String> {
         val individualScore = performance.individualScore
+        val phrase = "How did your team even win the game?"
         return if (individualScore < 0.5) {
             listOf(
-                "Looks like all you really know how to get carried.",
-                "How can you play so badly when you are in such a good team?",
-                "Boosted."
+                "$phrase Looks like you really know how to get carried.",
+                "$phrase How can you play so badly when you are in such a good team?",
+                "$phrase Boosted."
             )
         } else if (individualScore < 0.7) {
             listOf(

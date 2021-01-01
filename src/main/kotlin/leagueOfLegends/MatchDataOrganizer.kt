@@ -21,8 +21,7 @@ class MatchDataOrganizer(val match: JSONObject, val champions: JSONObject, val p
 
         val win = protagonistTeam.get("win") == "Win"
         val champion = getChampion(protagonist.getInt("championId"))
-        val performance = Performance(match, protagonistStats, protagonistTeam, antagonistStats, champion, win)
-        return performance
+        return Performance(match, protagonistStats, protagonistTeam, antagonistStats, champion, win)
     }
 
     private fun getProtagonist(): JSONObject {

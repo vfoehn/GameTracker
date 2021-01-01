@@ -1,6 +1,7 @@
 package leagueOfLegends
 
 import org.json.JSONObject
+import kotlin.math.exp
 
 // A Performance contains all the information about a given user in a given match. This information includes
 // the number of kills, deaths etc.
@@ -9,10 +10,6 @@ import org.json.JSONObject
 class Performance(val match: JSONObject, val protagonistStats: JSONObject, val protagonistTeam: JSONObject,
                   val antagonistStats: JSONObject?, val champion: JSONObject, val win: Boolean) {
 
-//    init {
-//        // TODO: Delete block
-//        println("\n$protagonistStats")
-//    }
     val kills = protagonistStats.getInt("kills")
     val deaths = protagonistStats.getInt("deaths")
     val assists = protagonistStats.getInt("assists")
@@ -22,10 +19,7 @@ class Performance(val match: JSONObject, val protagonistStats: JSONObject, val p
     var isPoor: Boolean = isPoorPerformance()
 
     private fun isPoorPerformance(): Boolean {
-        // If the protagonistStats lost the game and had a negative kda, it is considered a bad performance.
-        println("performanceScore: $performanceScore")
-        return true //TODO: Remove
-//        return !win && kda < 1
+        return performanceScore < 0.3
     }
 
     /*
@@ -44,8 +38,8 @@ class Performance(val match: JSONObject, val protagonistStats: JSONObject, val p
         return (teamScore + 2 * individualScore) / 3
     }
 
-    fun computeIndividualScore(localKda: Double): Double {
-        val kdaScore = computeNormalizedScore(kda)
+    private fun computeIndividualScore(localKda: Double): Double {
+        val kdaScore = computeNormalizedScore(localKda)
         return if (antagonistStats != null) {
             val duelScore = computeDuelScore()
             (kdaScore + duelScore) / 2
@@ -55,7 +49,7 @@ class Performance(val match: JSONObject, val protagonistStats: JSONObject, val p
     }
 
     private fun computeDuelScore(): Double {
-        // The following branch is required to smart-cast "angatonistStats" to a non-null type.
+        // The following branch is required to smart-cast "antagonistStats" to a non-null type.
         if (antagonistStats == null) {
             return -1.0
         }
@@ -87,7 +81,7 @@ class Performance(val match: JSONObject, val protagonistStats: JSONObject, val p
      *  - As the KDA goes towards infinity, the score goes towards 1.
      */
     private fun computeNormalizedScore(value: Double) =
-        if (value <= 1)  value/2 else 1/(1+Math.exp(1-value))
+        if (value <= 1)  value/2 else 1/(1+ exp(1-value))
 
     override fun toString(): String {
         "You went $kills/$deaths/$assists on $champion"

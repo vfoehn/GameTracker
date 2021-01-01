@@ -5,7 +5,7 @@ evaluated. Based on the computed score of the performance, a Telegram bot will a
 Use case: Track your friend's matches and automatically send some **friendly** banter if they don't have good
 performances.
 
-![Image](example/telegram_bot_messages.jpg){:height="50%" width="50%"}
+![Image](example/telegram_bot_messages.jpg)
 
 ## Preface
 The main goal of this project was for me to practice my newly acquired Kotlin skills.
@@ -24,7 +24,7 @@ Note: The program runs on Windows and UNIX-based systems.
    the bot "@getidsbot" to the chat.
 2. Create the file `config.properties` under `src/main/resources`. The file [example/config.properties](example/config.properties)
    shows you which properties need to be provided.\
-   Warning: Make sure to capitalize the property values correctly and remove any whitespaces.
+   Warning: Make sure to capitalize the property values correctly and remove any trailing whitespaces.
 3. From the root directory of the project run `gradlew uberJar` (or `./gradlew uberJar` on a UNIX-based system).
 4. Run `java -jar build\libs\GameTracker-1.0.jar`
 

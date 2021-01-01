@@ -3,12 +3,12 @@ import leagueOfLegends.MessageGenerator
 import org.apache.log4j.Logger
 import requests.TelegramSendMessageRequest
 import telegram.TelegramBot
-import java.util.Properties;
+import java.util.Properties
 
 // The Controller is the central unit of the program. Periodically, it uses the LeagueOfLegendsClient to fetch
 // the latest match history for a given user. If the user had a poor performance in any of the matches, the
 // Controller uses the TelegramBot to send a message based on that performance to the user.
-class Controller(val properties: Properties) {
+class Controller(properties: Properties) {
 
     var logger: Logger = Logger.getLogger(Controller::class.java)
 
@@ -36,7 +36,7 @@ class Controller(val properties: Properties) {
                 val message = MessageGenerator.generateMessage(poorPerformances.first)
                 print(message)
                 val request = TelegramSendMessageRequest(telegramBot.apiKey, telegramBot.chatId, message)
-                val response = request.sendRequest()
+                request.sendRequest()
             }
 
             logger.info("Sleeping for $sleepDuration ms.")

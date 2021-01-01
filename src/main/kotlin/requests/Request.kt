@@ -15,19 +15,25 @@ import kotlin.system.exitProcess
 // The class provides logic to deal with different (successful and failed) HTTP responses.
 abstract class Request(val apiKey: String) {
 
-    var logger: Logger = Logger.getLogger(Request::class.java)
+    private var logger: Logger = Logger.getLogger(Request::class.java)
 
-    val MAX_FAILED_REQUEST = 5
-    val BACKOFF_TIME: Long = 2000
+    // Some API servers (e.g. Riot Games) have rate limits that are computed for every 2 minutes.
+    // This is why it makes sense to back off up to a minutes between attempted requests.
+    private val MAX_FAILED_REQUEST = 7
+    private val INITIAL_BACKOFF_TIME: Long = 2000
+    private var currentBackoffTime = INITIAL_BACKOFF_TIME // Increases exponentially
 
     abstract fun getUrl(): String
 
+    private fun cleanUrl(urlString: String): String {
+        return urlString.replace(" ", "+")
+    }
+
     abstract fun setHeader(con: HttpURLConnection)
 
-    fun sendSingleRequest(encapsulateJSONArray: Boolean): JSONObject {
+    private fun sendSingleRequest(encapsulateJSONArray: Boolean): JSONObject {
         val response: JSONObject?
-        val urlString = getUrl()
-        println("urlString: $urlString") // TODO: Delete
+        val urlString = cleanUrl(getUrl())
         val url = URL(urlString)
         val con = url.openConnection() as HttpURLConnection
         setHeader(con)
@@ -75,6 +81,7 @@ abstract class Request(val apiKey: String) {
             try {
                 accountResponse = sendSingleRequest(encapsulateJSONArray)
                 numFailedRequests = 0
+                currentBackoffTime = INITIAL_BACKOFF_TIME
             } catch (e: Exception) {
                 numFailedRequests++
                 if (numFailedRequests >= MAX_FAILED_REQUEST) {
@@ -83,7 +90,8 @@ abstract class Request(val apiKey: String) {
                     exitProcess(-1)
                 }
 
-                Thread.sleep(BACKOFF_TIME)
+                Thread.sleep(currentBackoffTime)
+                currentBackoffTime *= 2
             }
         }
 
