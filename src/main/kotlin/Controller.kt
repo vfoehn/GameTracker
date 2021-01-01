@@ -22,7 +22,7 @@ class Controller(val properties: Properties) {
         logger.info("Controller initialized.")
     }
 
-    fun poll(sleepDuration: Long = 10000) {
+    fun poll(sleepDuration: Long = 100000) {
         while (true) {
             lolClient.updateMatchHistory()
             val poorPerformances = lolClient.poorPerformances

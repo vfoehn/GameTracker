@@ -1,6 +1,7 @@
 package leagueOfLegends
 
 import FileHandler
+import getField
 import org.json.JSONArray
 import org.json.JSONObject
 import requests.DDragonRequest
@@ -20,6 +21,7 @@ import java.util.*
 class LeagueOfLegendsClient(val apiKey: String, val region: String, val username: String) {
 
     val dataDirectory = "league_of_legends${File.separator}player_data${File.separator}$username"
+    val matchHistoryFilePath = "$dataDirectory${File.separator}match_history_debug.json" // TODO: Remove debug
     lateinit var mostRecentMatchTimestamp: Calendar
     lateinit var champions: JSONObject
     lateinit var account: JSONObject
@@ -35,7 +37,7 @@ class LeagueOfLegendsClient(val apiKey: String, val region: String, val username
     fun updateMatchHistory() {
         if (FileHandler.fileExists(dataDirectory)) {
             // Load previous match history from file.
-            val jsonTokener = FileHandler.readJsonFromFile("$dataDirectory${File.separator}match_history_debug.json")
+            val jsonTokener = FileHandler.readJsonFromFile(matchHistoryFilePath)
             val storedMatchHistory = JSONArray(jsonTokener)
             mostRecentMatchTimestamp = timestampToCalendar((storedMatchHistory[0] as JSONObject).getLong("timestamp"))
 
@@ -52,18 +54,19 @@ class LeagueOfLegendsClient(val apiKey: String, val region: String, val username
             findPoorPerformances()
         }
 
-        FileHandler.writeToFile("$dataDirectory${File.separator}match_history.json", matchHistory)
+        FileHandler.writeToFile("$matchHistoryFilePath", matchHistory) // TODO: Remove the debug path
         mostRecentMatchTimestamp = timestampToCalendar(getMatchFromHistory(0).getLong("timestamp"))
     }
 
     private fun fetchChampionsInformation() {
         // Get current patch version.
         var request = DDragonRequest(apiKey, region, "api/versions.json")
-        val response: JSONObject = request.sendRequest(encapsulateJSONArray = true)
+        var response: JSONObject = request.sendRequest(encapsulateJSONArray = true)
         val latestVersion = (response["versions"] as JSONArray)[0]
 
         request = DDragonRequest(apiKey, region, "cdn/$latestVersion/data/en_US/champion.json")
-        champions = request.sendRequest()
+        response = request.sendRequest()
+        champions = response.getField("data")
     }
 
     private fun fetchAccountInformation() {
@@ -94,7 +97,7 @@ class LeagueOfLegendsClient(val apiKey: String, val region: String, val username
         poorPerformances = LinkedList<Performance>() // Reset list of poor performances
         for (element in matchHistory) {
             val match = fetchMatchInfo((element as JSONObject).getLong("gameId"))
-            val matchAnalyzer = MatchDataOrganizer(match, username)
+            val matchAnalyzer = MatchDataOrganizer(match, champions, username)
             val performance: Performance = matchAnalyzer.getPerformance()
             if (performance.isPoor) {
                 poorPerformances.add(performance)
