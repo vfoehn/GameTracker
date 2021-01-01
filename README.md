@@ -26,13 +26,19 @@ Note: The program runs on Windows and UNIX-based systems.
    shows you which properties need to be provided.\
    Warning: Make sure to capitalize the property values correctly and remove any trailing whitespaces.
 3. From the root directory of the project run `gradlew uberJar` (or `./gradlew uberJar` on a UNIX-based system).
-4. Run `java -jar build\libs\GameTracker-1.0.jar`
+4. Run `java -jar build\libs\GameTracker-1.0.jar` (or `java -jar build/libs/GameTracker-1.0.jar`on a UNIX-based system).
 
 ## Comments about Program
-- The program periodically fetches the new match history from the API server. If it finds any new matches that fit the 
-  performance criteria, it sends a Telegram message. After that, the program sleeps until it fetches the new match 
-  history again.
+- The program periodically fetches the new match history from the League of Legends API server. If it finds any new 
+  matches that fit the performance criteria (e.g., poor performance), it sends a Telegram message. After that, the 
+  program sleeps until it fetches the new match history again.
 - The program stores the match history it previously fetched in files. That means even if it is shut down, it knows 
   where to start once it is launched again. This would make it a good candidate for a cron job. 
-- The program only ever sends a message for 1 game after fetching new match history. This is to avoid spamming the 
+- The program only ever sends a message for 1 game after fetching the new match history. This is to avoid spamming the 
   chats.
+- Performance evaluation of a match: The program considers 3 main aspects to assess the performance of a user in a 
+  match:
+  1. Did the team win?
+  2. Did the user have good statistics (kills, deaths, assists, etc.)?
+  3. How good are the user's statistics compared to the player on the opposing team that played the same position? 
+     (Who got more kills? Who earned more gold? etc.)
