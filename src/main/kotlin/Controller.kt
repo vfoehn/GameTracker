@@ -1,4 +1,5 @@
 import leagueOfLegends.LeagueOfLegendsClient
+import leagueOfLegends.MessageGenerator
 import org.apache.log4j.Logger
 import requests.TelegramSendMessageRequest
 import telegram.TelegramBot
@@ -32,11 +33,9 @@ class Controller(val properties: Properties) {
             } else {
                 // Send a message to the chat identified by chatId.
                 logger.info("There are new poor performances. A message is being set.")
-                val request = TelegramSendMessageRequest(
-                    telegramBot.apiKey,
-                    telegramBot.chatId,
-                    poorPerformances.first.toString()
-                )
+                val message = MessageGenerator.generateMessage(poorPerformances.first)
+                print(message)
+                val request = TelegramSendMessageRequest(telegramBot.apiKey, telegramBot.chatId, message)
                 val response = request.sendRequest()
             }
 

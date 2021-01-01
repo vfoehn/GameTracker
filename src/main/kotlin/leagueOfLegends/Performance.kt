@@ -9,14 +9,19 @@ import org.json.JSONObject
 class Performance(val match: JSONObject, val protagonistStats: JSONObject, val protagonistTeam: JSONObject,
                   val antagonistStats: JSONObject?, val champion: JSONObject, val win: Boolean) {
 
+    init {
+        println("\n$protagonistStats")
+    }
     val kills = protagonistStats.getInt("kills")
     val deaths = protagonistStats.getInt("deaths")
-    val kda = kills.toDouble() / Math.max(1, deaths)
+    val kda = computeSafeRatio(kills.toDouble(), deaths.toDouble())
+    val individualScore = computeIndividualScore(kda)
     var performanceScore: Double = computePerformance()
     var isPoor: Boolean = isPoorPerformance()
 
     private fun isPoorPerformance(): Boolean {
         // If the protagonistStats lost the game and had a negative kda, it is considered a bad performance.
+        println("performanceScore: $performanceScore")
         return true //TODO: Remove
 //        return !win && kda < 1
     }
@@ -33,25 +38,54 @@ class Performance(val match: JSONObject, val protagonistStats: JSONObject, val p
      * is ignored.
      */
     private fun computePerformance(): Double {
-        val winScore = if (win) 1 else 0
-        val kdaScore = computeKdaScore()
-        if (antagonistStats != null) {
-            val directDuelScore =
+        val teamScore = if (win) 1 else 0
+        return (teamScore + 2 * individualScore) / 3
+    }
+
+    fun computeIndividualScore(localKda: Double): Double {
+        val kdaScore = computeNormalizedScore(kda)
+        return if (antagonistStats != null) {
+            val duelScore = computeDuelScore()
+            (kdaScore + duelScore) / 2
+        } else {
+            kdaScore
         }
-
-
-        return score
     }
 
-    // To plot the function run "Plot[Piecewise[{{x/2,  0 <= x < 1}, {1/(1+exp(1-x)), x > 0}}], {x, 0, 10}]"
-    // on https://www.wolframalpha.com/.
-    private fun computeKdaScore() =
-        if (kda <= 1)  kda/2 else 1/(1+Math.exp(1-kda))
+    private fun computeDuelScore(): Double {
+        // The following branch is required to smart-cast "angatonistStats" to a non-null type.
+        if (antagonistStats == null) {
+            return -1.0
+        }
+        val kda1 = kda
+        val kda2 = computeSafeRatio(antagonistStats.getDouble("kills"), antagonistStats.getDouble("deaths"))
+        val kdaDuelScore = computeNormalizedScore(computeSafeRatio(kda1, kda2))
 
-    private fun computeDirectDuelScore() {
+        val goldEarned1 = protagonistStats.getDouble("goldEarned")
+        val goldEarned2 = antagonistStats.getDouble("goldEarned")
+        val goldEarnedDuelScore = computeNormalizedScore(computeSafeRatio(goldEarned1, goldEarned2))
 
-
+        return (kdaDuelScore + goldEarnedDuelScore) / 2
     }
+
+    private fun computeSafeRatio(x: Double, y: Double): Double {
+        return if (y == 0.0) {
+            if (x == 0.0) 1.0 else x
+        } else {
+            x / y
+        }
+    }
+
+    /*
+     * To plot the function run "Plot[Piecewise[{{x/2,  0 <= x < 1}, {1/(1+exp(1-x)), x > 0}}], {x, 0, 10}]"
+     * on https://www.wolframalpha.com/.
+     * Intuition:
+     *  - As the KDA goes towards 0, the score goes towards 0
+     *  - If the KDA is 1, the score is 0.5
+     *  - As the KDA goes towards infinity, the score goes towards 1.
+     */
+    private fun computeNormalizedScore(value: Double) =
+        if (value <= 1)  value/2 else 1/(1+Math.exp(1-value))
 
     override fun toString(): String {
         return "[gameId: ${match.getLong("gameId")}, win: $win, kills: $kills, deaths: $deaths]"

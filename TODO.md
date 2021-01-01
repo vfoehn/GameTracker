@@ -8,6 +8,7 @@
 - Reduce visibility classifiers wherever possible
 - Look for "here", "todo" and "debug" in the files
 - **Check out usernames that contain white spaces"
+- Create exponential backoff in "Request"
 
 
 

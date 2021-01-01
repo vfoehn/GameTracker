@@ -55,15 +55,12 @@ class MatchDataOrganizer(val match: JSONObject, val champions: JSONObject, val p
 
     private fun getAntagonist(protagonist: JSONObject, antagonistTeam: JSONObject): JSONObject? {
         val antagonistTeamId = antagonistTeam.getInt("teamId")
-        var antagonistStats = JSONObject()
+        var antagonistStats: JSONObject? = null
         val participants = match["participants"] as JSONArray
         for (participant in participants) {
             val participantJson = participant as JSONObject
             if (samePosition(protagonist.getField("timeline"), participantJson.getField("timeline")) &&
                 participantJson.getInt("teamId") == antagonistTeamId) {
-                println(protagonist)
-                println(participantJson)
-                println()
                 antagonistStats = participantJson.getField("stats")
                 break
             }
