@@ -21,10 +21,36 @@ class Performance(val match: JSONObject, val protagonistStats: JSONObject, val p
 //        return !win && kda < 1
     }
 
+    /*
+     * The performance is computed based on three criteria:
+     *  1. Did the user win the game?
+     *  2. The protagonist's KDA (kill death ration)
+     *  3. The difference between the protagonist's and the antagonist's performance
+     *  Each aspect is scored on a scale of 0 to 1. The weighted average of all aspects is the final performance.
+     *
+     * Note: The notion of "positions" only exists in some game modes. Therefore, we can only define a clear
+     * antagonist some game modes. If there is no antagonist, the third criteria of the performance evaluation
+     * is ignored.
+     */
     private fun computePerformance(): Double {
-        val score = 0.0
+        val winScore = if (win) 1 else 0
+        val kdaScore = computeKdaScore()
+        if (antagonistStats != null) {
+            val directDuelScore =
+        }
+
 
         return score
+    }
+
+    // To plot the function run "Plot[Piecewise[{{x/2,  0 <= x < 1}, {1/(1+exp(1-x)), x > 0}}], {x, 0, 10}]"
+    // on https://www.wolframalpha.com/.
+    private fun computeKdaScore() =
+        if (kda <= 1)  kda/2 else 1/(1+Math.exp(1-kda))
+
+    private fun computeDirectDuelScore() {
+
+
     }
 
     override fun toString(): String {
