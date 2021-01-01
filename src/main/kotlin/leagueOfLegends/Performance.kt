@@ -9,11 +9,13 @@ import org.json.JSONObject
 class Performance(val match: JSONObject, val protagonistStats: JSONObject, val protagonistTeam: JSONObject,
                   val antagonistStats: JSONObject?, val champion: JSONObject, val win: Boolean) {
 
-    init {
-        println("\n$protagonistStats")
-    }
+//    init {
+//        // TODO: Delete block
+//        println("\n$protagonistStats")
+//    }
     val kills = protagonistStats.getInt("kills")
     val deaths = protagonistStats.getInt("deaths")
+    val assists = protagonistStats.getInt("assists")
     val kda = computeSafeRatio(kills.toDouble(), deaths.toDouble())
     val individualScore = computeIndividualScore(kda)
     var performanceScore: Double = computePerformance()
@@ -88,6 +90,7 @@ class Performance(val match: JSONObject, val protagonistStats: JSONObject, val p
         if (value <= 1)  value/2 else 1/(1+Math.exp(1-value))
 
     override fun toString(): String {
-        return "[gameId: ${match.getLong("gameId")}, win: $win, kills: $kills, deaths: $deaths]"
+        "You went $kills/$deaths/$assists on $champion"
+        return "win: $win, kills: $kills, deaths: $deaths]"
     }
 }

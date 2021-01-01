@@ -22,6 +22,7 @@ class LeagueOfLegendsClient(val apiKey: String, val region: String, val username
 
     val dataDirectory = "league_of_legends${File.separator}player_data${File.separator}$username"
     val matchHistoryFilePath = "$dataDirectory${File.separator}match_history_debug.json" // TODO: Remove debug
+    val MAX_NUMBER_OF_REQUESTS = 100 // Riot Games only allows 100 requests per 2 minutes.
     lateinit var mostRecentMatchTimestamp: Calendar
     lateinit var champions: JSONObject
     lateinit var account: JSONObject
@@ -95,12 +96,18 @@ class LeagueOfLegendsClient(val apiKey: String, val region: String, val username
 
     private fun findPoorPerformances() {
         poorPerformances = LinkedList<Performance>() // Reset list of poor performances
+        var i = 0
         for (element in matchHistory) {
             val match = fetchMatchInfo((element as JSONObject).getLong("gameId"))
             val matchAnalyzer = MatchDataOrganizer(match, champions, username)
             val performance: Performance = matchAnalyzer.getPerformance()
             if (performance.isPoor) {
                 poorPerformances.add(performance)
+            }
+            if (i++ >= MAX_NUMBER_OF_REQUESTS / 5) {
+                // Each iteration requires 1 API request. In order not to exceed the API server rate limits
+                // we terminate the loop after a fixed number of iterations.
+                break
             }
         }
     }

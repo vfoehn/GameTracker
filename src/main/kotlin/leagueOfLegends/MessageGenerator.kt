@@ -2,9 +2,17 @@ package leagueOfLegends
 
 object MessageGenerator {
 
+    val LINE_BREAK = "%0A"
+
     fun generateMessage(performance: Performance): String {
         val potentialMessages = if (performance.win) generateWinMessage(performance) else generateDefeatMessage(performance)
-        return potentialMessages.random()
+        return "${generateGameSummary(performance)}$LINE_BREAK" +
+               "${potentialMessages.random()}"
+    }
+
+    private fun generateGameSummary(performance: Performance): String {
+        val championName = performance.champion.getString("name")
+        return "You went ${performance.kills}/${performance.deaths}/${performance.assists} on $championName."
     }
 
     private fun generateDefeatMessage(performance: Performance): List<String> {

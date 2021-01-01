@@ -5,6 +5,8 @@ evaluated. Based on the computed score of the performance, a Telegram bot will a
 Use case: Track your friend's matches and automatically send some **friendly** banter if they don't have good
 performances.
 
+![Image](example/telegram_bot_messages.jpg)
+
 ## Preface
 The main goal of this project was for me to practice my newly acquired Kotlin skills.
 

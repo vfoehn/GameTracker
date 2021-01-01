@@ -27,7 +27,7 @@ abstract class Request(val apiKey: String) {
     fun sendSingleRequest(encapsulateJSONArray: Boolean): JSONObject {
         val response: JSONObject?
         val urlString = getUrl()
-        // println("urlString: $urlString")
+        println("urlString: $urlString") // TODO: Delete
         val url = URL(urlString)
         val con = url.openConnection() as HttpURLConnection
         setHeader(con)
